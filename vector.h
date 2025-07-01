@@ -55,7 +55,7 @@ void __TYPE_NAME##_vector_fill(__TYPE_NAME##_vector_t* vec, __ELEMENT_TYPE eleme
 }
 
 #define __VECTOR_PUSH_IMPL(__ELEMENT_TYPE, __TYPE_NAME) \
-void __TYPE_NAME####_vector_push(__TYPE_NAME##_vector_t* vec, __ELEMENT_TYPE element) {\
+void __TYPE_NAME##_vector_push(__TYPE_NAME##_vector_t* vec, __ELEMENT_TYPE element) {\
     if(vec->size == vec->capacity) {\
         vec->capacity*=2;\
         vec->arr = (__ELEMENT_TYPE*)realloc(vec->arr, sizeof(__ELEMENT_TYPE)*vec->capacity);\
