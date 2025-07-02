@@ -23,3 +23,12 @@ Sets the element at the passed index. Exits the program if the index is out of r
 Calls a function that returns nothing on each element of the vector
 - ```__ELEMENT_TYPE __TYPE_NAME_vector_reduce(__TYPE_NAME_vector_t* vec, __ELEMENT_TYPE(*f)(__ELEMENT_TYPE, __ELEMENT_TYPE))```:  
 Calls a function that takes 2 parameters of type ```__ELEMENT_TYPE``` and returns a value of type ```__ELEMENT_TYPE``` on each element. The result of a call with the previous element as a parameter is used as parameter for the following calls.
+- ```void __TYPE_NAME_vector_resize(__TYPE_NAME_vector_t* vec, size_t capacity)```:  
+Changes the capacity of the backing array to the given capacity and changes the starting index to 0. If the given capacity is lower than the vector's size, the program is killed.
+- ```void __TYPE_NAME_vector_elements_in_array(__TYPE_NAME_vector_t* vec, __ELEMENT_TYPE* arr)```:  
+Copies the elements in the vector inside an array. It assumes that the array is big enough to contain the vector's elements.
+- ```bool __TYPE_NAME_vector_backing_array_wraps_around(__TYPE_NAME_vector_t* vec)```:  
+Returns whether the elements inside the backing array go "beyond the end and back to the start" (since the backing array is used as a circular array)
+- ```void __TYPE_NAME_vector_rearrange(__TYPE_NAME_vector_t* vec, size_t starting_index)```:  
+"Moves" the elements inside the backing array so that the first element of the vector is at the given index.
+If the index is out of range, the program is killed.
