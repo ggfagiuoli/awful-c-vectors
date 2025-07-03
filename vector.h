@@ -15,7 +15,7 @@ size_t capacity;\
 #define __VECTOR_METHODS_DECL(__ELEMENT_TYPE, __TYPE_NAME) \
 __TYPE_NAME##_vector_t* __TYPE_NAME##_vector_new(size_t capacity);\
 __TYPE_NAME##_vector_t* __TYPE_NAME##_vector_from_array_copy(__ELEMENT_TYPE* arr, size_t size);\
-void __TYPE_NAME##_vector_resize(__ELEMENT_TYPE* arr, size_t capacity);\
+void __TYPE_NAME##_vector_resize(__TYPE_NAME##_vector_t* arr, size_t capacity);\
 void __TYPE_NAME##_vector_fill(__TYPE_NAME##_vector_t* vec, __ELEMENT_TYPE element);\
 void __TYPE_NAME##_vector_push(__TYPE_NAME##_vector_t* vec, __ELEMENT_TYPE element);\
 __ELEMENT_TYPE __TYPE_NAME##_vector_pop(__TYPE_NAME##_vector_t* vec);\
@@ -99,7 +99,7 @@ __ELEMENT_TYPE __TYPE_NAME##_vector_pop(__TYPE_NAME##_vector_t* vec) {\
 #define __VECTOR_AT_IMPL(__ELEMENT_TYPE, __TYPE_NAME) \
 __ELEMENT_TYPE __TYPE_NAME##_vector_at(__TYPE_NAME##_vector_t* vec, size_t index) {\
     if(index >= vec->size) {\
-        fprintf(stderr, "Error: attempted to access index %zu of vector of size %zu backed by array at address %zx\n", index, vec->size, vec->arr);\
+        fprintf(stderr, "Error: attempted to access index %zu of vector of size %zu backed by array at address %p\n", index, vec->size, vec->arr);\
         exit(1);\
     }\
     return vec->arr[(vec->starting_index + index) % vec->capacity];\
@@ -108,7 +108,7 @@ __ELEMENT_TYPE __TYPE_NAME##_vector_at(__TYPE_NAME##_vector_t* vec, size_t index
 #define __VECTOR_SET_AT_IMPL(__ELEMENT_TYPE, __TYPE_NAME) \
 void __TYPE_NAME##_vector_set_at(__TYPE_NAME##_vector_t* vec, size_t index, __ELEMENT_TYPE element) {\
     if(index >= vec->size) {\
-        fprintf(stderr, "Error: attempted to access index %zu of vector of size %zu backed by array at address %zx\n", index, vec->size, vec->arr);\
+        fprintf(stderr, "Error: attempted to access index %zu of vector of size %zu backed by array at address %p\n", index, vec->size, vec->arr);\
         exit(1);\
     }\
     vec->arr[(vec->starting_index + index) % vec->capacity] = element;\
@@ -124,7 +124,7 @@ void __TYPE_NAME##_vector_for_each(__TYPE_NAME##_vector_t* vec, void(*f)(__ELEME
 #define __VECTOR_REDUCE_IMPL(__ELEMENT_TYPE, __TYPE_NAME) \
 __ELEMENT_TYPE __TYPE_NAME##_vector_reduce(__TYPE_NAME##_vector_t* vec, __ELEMENT_TYPE##(*f)(__ELEMENT_TYPE, __ELEMENT_TYPE)) {\
     if(vec->size == 0) {\
-        fprintf(stderr, "Error: attempted to reduce an empty vector backed by array at address %zx\n",vec->arr);\
+        fprintf(stderr, "Error: attempted to reduce an empty vector backed by array at address %p\n",vec->arr);\
         exit(1);\
     }\
     __ELEMENT_TYPE acc = vec->arr[vec->starting_index];\
