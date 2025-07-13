@@ -17,7 +17,7 @@ Appends an element at the end of the vector. If there is not enough space, the b
 "Removes" the element at the front of the vector. If there is way too much empty space, the backing array is resized.
 - ```__ELEMENT_TYPE __TYPE_NAME_vector_at(__TYPE_NAME_vector_t* vec, size_t index)```:  
 Gets the element at the passed index. Exits the program if the index is out of range.
-- ```void __TYPE_NAME_vector_for_each(__TYPE_NAME_vector_t* vec, void(*f)(__ELEMENT_TYPE))```:  
+- ```void __TYPE_NAME_vector_set_at(__TYPE_NAME_vector_t* vec, size_t index, __ELEMENT_TYPE element)```:  
 Sets the element at the passed index. Exits the program if the index is out of range.
 - ```void __TYPE_NAME_vector_for_each(__TYPE_NAME_vector_t* vec, void(*f)(__ELEMENT_TYPE))```:
 Calls a function that returns nothing on each element of the vector
